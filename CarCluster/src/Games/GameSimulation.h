@@ -130,6 +130,13 @@ class GameState {
   bool absLight = false;                             // Shows ABS Signal on dashboard
   bool batteryLight = false;                         // Show Battery Warning.
 
+  // Clock
+  uint8_t clockHour = 0;                                 // Hour, simple format statement to display PC's hour.
+  uint8_t clockMinute = 0;                               // Minute, simple format statement to display PC's minute.
+  uint8_t clockYear = 0;                                 // Year, simple format statement to display PC's year.
+  uint8_t clockMonth = 0;                                // Month, simple format statement to display PC's month.
+  uint8_t clockDay = 0;                                  // Day, simple format statement to display PC's day.
+
   // Other stuff
   int buttonEventToProcess = 0;                      // Certain clusters have buttons that can perform actions. Set this to activate them - values are cluster dependent
 

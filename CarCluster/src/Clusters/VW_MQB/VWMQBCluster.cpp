@@ -120,6 +120,8 @@ void VWMQBCluster::updateWithGame(GameState& game) {
     sendOtherLights();
     sendDoorStatus(game.doorOpen);
     sendOutdoorTemperature(game.outdoorTemperature);
+    sendTime(game.clockHour, game.clockMinute);
+    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     if (game.buttonEventToProcess != 0) {
       sendSteeringWheelControls(game.buttonEventToProcess + 3);
@@ -588,6 +590,27 @@ void VWMQBCluster::sendTestBuffers() {
   testBuff[7] = 0x00;
   CAN.sendMsgBuf(DATE_ID, 0, 8, testBuff);*/
 }
+
+void VWMQBCluster::sendTime(uint8_t clockHour, uint8_t clockMinute) {
+  timeBuff[0] = 0x24; // bit 0: 24 ?
+  timeBuff[1] = 0x51; // bit 1: 51 clock time
+  timeBuff[2] = clockHour; // bit 2: hour
+  timeBuff[3] = clockMinute; // bit 3: minute
+  timeBuff[4] = 0x00; // bit 4: second
+
+  CAN.sendMsgBuf(DATE_ID, 0, 5, timeBuff);
+}
+
+void VWMQBCluster::sendDate(uint8_t clockYear, uint8_t clockMonth, uint8_t clockDay) {
+  timeBuff[0] = 0x24; // bit 0: 24 ?
+  timeBuff[1] = 0x51; // bit 1: 51 clock time
+  timeBuff[2] = clockYear; // bit 2: year
+  timeBuff[3] = clockMonth; // bit 3: month
+  timeBuff[4] = clockDay; // bit 4: day
+
+  CAN.sendMsgBuf(DATE_ID, 0, 5, dateBuff);
+}
+
 
 void VWMQBCluster::handleReceivedData(long unsigned int canRxId, unsigned char canRxLen, unsigned char canRxBuf[]) {
   if (passthroughMode == false) {

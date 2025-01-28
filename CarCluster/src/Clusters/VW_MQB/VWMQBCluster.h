@@ -126,7 +126,9 @@ class VWMQBCluster: public Cluster {
                   outdoorTempBuff[8] = { 0x9A, 0x2A, 0x00, 0x60, 0xFE, 0x00, 0x00, 0x00 },
                   lichtAnfBuff[8] = { 0x00, 0x04, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00 },
                   lichtHintenBuff[8] = { 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-                  testBuff[8] = { 0x04, 0x06, 0x40, 0x00, 0xFF, 0xFE, 0x69, 0x2C };
+                  testBuff[8] = { 0x04, 0x06, 0x40, 0x00, 0xFF, 0xFE, 0x69, 0x2C },
+                  timeBuff[5]= { 0x24, 0x51, 0x00, 0x00, 0x00 },
+                  dateBuff[5]= { 0x24, 0x50, 0x00, 0x00, 0x00 };
 
     void sendIgnitionStatus(boolean ignition);
     void sendBacklightBrightness(uint8_t brightness);
@@ -146,6 +148,8 @@ class VWMQBCluster: public Cluster {
     void sendDoorStatus(boolean doorOpen);
     void sendOutdoorTemperature(int temperature);
     void sendOtherLights();
+    void sendTime(uint8_t clockHour, uint8_t clockMinute);
+    void sendDate(uint8_t clockYear, uint8_t clockMonth, uint8_t clockDay);
     
     void setFuel(GameState& game);
     uint8_t mapGenericGearToLocalGear(GearState inputGear);
