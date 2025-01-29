@@ -48,7 +48,7 @@
 #define LICHT_ANF_ID 0x3D5 // Lights... somewhere
 #define DOOR_STATUS_ID 0x583 // Door status
 #define OUTDOOR_TEMP_ID 0x5e1 // Outdoor temperature
-#define DATE_ID 0x17331110
+#define DATE_ID 0x17331100 // From car radio to cluster
 // WARNING: NEVER TOUCH ADDRESS 0x6B4 !!!!! This is part of component protection/VIN
 
 class VWMQBCluster: public Cluster {

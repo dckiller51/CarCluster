@@ -105,6 +105,8 @@ void VWMQBCluster::updateWithGame(GameState& game) {
 
     // Testing only. To be removed
     // sendTestBuffers();
+    sendTime(game.clockHour, game.clockMinute);
+    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     seq++;
     if (seq > 15) {
@@ -120,8 +122,6 @@ void VWMQBCluster::updateWithGame(GameState& game) {
     sendOtherLights();
     sendDoorStatus(game.doorOpen);
     sendOutdoorTemperature(game.outdoorTemperature);
-    sendTime(game.clockHour, game.clockMinute);
-    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     if (game.buttonEventToProcess != 0) {
       sendSteeringWheelControls(game.buttonEventToProcess + 3);
