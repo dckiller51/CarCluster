@@ -59,8 +59,14 @@ class WebDashboard {
     Card button3Card;
     Card ignitionCard;
     Card driveModeCard;
-    Card outdoorTemperatureCard;
+    //Card outdoorTemperatureCard;
+    Card airTemperatureCard;
     Card indicatorsBlinkCard;
+    Card clockHourCard;
+    Card clockMinuteCard;
+    Card clockYearCard;
+    Card clockMonthCard;
+    Card clockDayCard;
 
     // Card val0Card(&dashboard, SLIDER_CARD, "VAL0", "", 0, 255);
     // Card val1Card(&dashboard, SLIDER_CARD, "VAL1", "", 0, 255);

@@ -63,7 +63,7 @@
 // 
 // 1 for enabled
 // 0 for disabled
-#define WIFI_ENABLED 0
+#define WIFI_ENABLED 1
 
 // Analog fuel simulation - for clusters with separate fuel level pins (currently VW PQ and MQB clusters).
 // Requires use of X9C10X digital potentiometer(s)

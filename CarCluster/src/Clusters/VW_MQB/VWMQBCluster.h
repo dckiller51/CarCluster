@@ -47,7 +47,8 @@
 #define LICHT_HINTEN_01_ID 0x3D6 // Lights rear
 #define LICHT_ANF_ID 0x3D5 // Lights... somewhere
 #define DOOR_STATUS_ID 0x583 // Door status
-#define OUTDOOR_TEMP_ID 0x5e1 // Outdoor temperature
+//#define OUTDOOR_TEMP_ID 0x5e1 // Outdoor temperature
+#define AIR_TEMP_ID 0x5e1 // Outdoor temperature
 #define DATE_ID 0x17331100 // From car radio to cluster
 // WARNING: NEVER TOUCH ADDRESS 0x6B4 !!!!! This is part of component protection/VIN
 
@@ -123,7 +124,8 @@ class VWMQBCluster: public Cluster {
                   parkBrakeBuff[4] = { 0x0, 0x00, 0x0, 0x0 },
                   lichtVorne01Buff[8] = { 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00 },
                   doorStatusBuff[8] = { 0x00, 0x10, 0x05, 0x00, 0x00, 0x44, 0x55, 0x00 },
-                  outdoorTempBuff[8] = { 0x9A, 0x2A, 0x00, 0x60, 0xFE, 0x00, 0x00, 0x00 },
+                  //outdoorTempBuff[8] = { 0x9A, 0x2A, 0x00, 0x60, 0xFE, 0x00, 0x00, 0x00 },
+                  airTempBuff[8] = { 0x9A, 0x2A, 0x00, 0x60, 0xFE, 0x00, 0x00, 0x00 },
                   lichtAnfBuff[8] = { 0x00, 0x04, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00 },
                   lichtHintenBuff[8] = { 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
                   testBuff[8] = { 0x04, 0x06, 0x40, 0x00, 0xFF, 0xFE, 0x69, 0x2C },
@@ -146,10 +148,11 @@ class VWMQBCluster: public Cluster {
     void sendParkBrake(boolean handbrakeActive);
     void sendLights(boolean highBeam, boolean rearFogLight);
     void sendDoorStatus(boolean doorOpen);
-    void sendOutdoorTemperature(int temperature);
+    //void sendOutdoorTemperature(int temperature);
+    void sendAirTemperature(int temperature);
     void sendOtherLights();
-    void sendTime(uint8_t clockHour, uint8_t clockMinute);
-    void sendDate(uint8_t clockYear, uint8_t clockMonth, uint8_t clockDay);
+    void sendTime(int clockHour, int clockMinute);
+    void sendDate(int clockYear, int clockMonth, int clockDay);
     
     void setFuel(GameState& game);
     uint8_t mapGenericGearToLocalGear(GearState inputGear);

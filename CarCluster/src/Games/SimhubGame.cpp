@@ -37,6 +37,7 @@ void SimhubGame::decodeSerialData(JsonDocument& doc) {
   gameState.leftTurningIndicator = doc["lft"];
   gameState.rightTurningIndicator = doc["rit"];
   gameState.coolantTemperature = doc["oit"];
+  gameState.airTemperature = doc["air"];
   gameState.doorOpen = (doc["pau"] != 0 || doc["run"] == 0);
   gameState.fuelQuantity = doc["fue"];
   gameState.handbrake = doc["hnb"];

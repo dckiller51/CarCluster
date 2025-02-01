@@ -105,8 +105,6 @@ void VWMQBCluster::updateWithGame(GameState& game) {
 
     // Testing only. To be removed
     // sendTestBuffers();
-    sendTime(game.clockHour, game.clockMinute);
-    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     seq++;
     if (seq > 15) {
@@ -121,7 +119,10 @@ void VWMQBCluster::updateWithGame(GameState& game) {
     sendLights(game.highBeam, game.rearFogLight);
     sendOtherLights();
     sendDoorStatus(game.doorOpen);
-    sendOutdoorTemperature(game.outdoorTemperature);
+    //sendOutdoorTemperature(game.outdoorTemperature);
+    sendAirTemperature(game.airTemperature);
+    sendTime(game.clockHour, game.clockMinute);
+    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     if (game.buttonEventToProcess != 0) {
       sendSteeringWheelControls(game.buttonEventToProcess + 3);
@@ -517,10 +518,16 @@ void VWMQBCluster::sendDoorStatus(boolean doorOpen) {
   CAN.sendMsgBuf(DOOR_STATUS_ID, 0, 8, doorStatusBuff);
 }
 
-void VWMQBCluster::sendOutdoorTemperature(int temperature) {
+/*void VWMQBCluster::sendOutdoorTemperature(int temperature) {
   outdoorTempBuff[0] = (50 + temperature) << 1; // Bit shift 1 to the left since 0.5 is the first bit
 
   CAN.sendMsgBuf(OUTDOOR_TEMP_ID, 0, 8, outdoorTempBuff);
+}*/
+
+void VWMQBCluster::sendAirTemperature(int temperature) {
+  airTempBuff[0] = (50 + temperature) << 1; // Bit shift 1 to the left since 0.5 is the first bit
+
+  CAN.sendMsgBuf(AIR_TEMP_ID, 0, 8, airTempBuff);
 }
 
 void VWMQBCluster::updateTestBuffer(uint8_t val0, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t val5, uint8_t val6, uint8_t val7) {
@@ -591,22 +598,22 @@ void VWMQBCluster::sendTestBuffers() {
   CAN.sendMsgBuf(DATE_ID, 0, 8, testBuff);*/
 }
 
-void VWMQBCluster::sendTime(uint8_t clockHour, uint8_t clockMinute) {
-  timeBuff[0] = 0x24; // bit 0: 24 ?
-  timeBuff[1] = 0x51; // bit 1: 51 clock time
+void VWMQBCluster::sendTime(int clockHour, int clockMinute) {
+  //timeBuff[0] = 36; // bit 0: 0x24 ?
+  //timeBuff[1] = 81; // bit 1: 0x51 clock time
   timeBuff[2] = clockHour; // bit 2: hour
   timeBuff[3] = clockMinute; // bit 3: minute
-  timeBuff[4] = 0x00; // bit 4: second
+  //timeBuff[4] = 0x00; // bit 4: second
 
   CAN.sendMsgBuf(DATE_ID, 0, 5, timeBuff);
 }
 
-void VWMQBCluster::sendDate(uint8_t clockYear, uint8_t clockMonth, uint8_t clockDay) {
-  timeBuff[0] = 0x24; // bit 0: 24 ?
-  timeBuff[1] = 0x51; // bit 1: 51 clock time
-  timeBuff[2] = clockYear; // bit 2: year
-  timeBuff[3] = clockMonth; // bit 3: month
-  timeBuff[4] = clockDay; // bit 4: day
+void VWMQBCluster::sendDate(int clockYear, int clockMonth, int clockDay) {
+  //dateBuff[0] = 36; // bit 0: 0x24 ?
+  //dateBuff[1] = 80; // bit 1: 0x50 clock date
+  dateBuff[2] = clockYear; // bit 2: year
+  dateBuff[3] = clockMonth; // bit 3: month
+  dateBuff[4] = clockDay; // bit 4: day
 
   CAN.sendMsgBuf(DATE_ID, 0, 5, dateBuff);
 }
@@ -641,11 +648,13 @@ void VWMQBCluster::handleReceivedData(long unsigned int canRxId, unsigned char c
     case MOTOR_18_ID: break;
     case MOTOR_26_ID: break;
     case MOTOR_07_ID: break;
-    case OUTDOOR_TEMP_ID: break;
+    //case OUTDOOR_TEMP_ID: break;
+    case AIR_TEMP_ID: break;
     case DOOR_STATUS_ID: break;
     case LICHT_HINTEN_01_ID: break;
     case LICHT_ANF_ID: break;
     case LICHT_VORNE_01_ID: break; // Intercept and decode this message to get the steering wheel stalk position
+    case DATE_ID: break;
     default: unknownId = true; CAN.sendMsgBuf(canRxId, canRxLen, canRxBuf); break;
   }
 }

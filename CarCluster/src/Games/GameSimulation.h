@@ -113,7 +113,8 @@ class GameState {
   int coolantTemperature = 100;                      // Coolant temperature 50-130C
   bool ignition = true;                              // Ignition status (set to false for accessory)
   int fuelQuantity = 100;                            // Amount of fuel
-  int outdoorTemperature = 20;                       // Outdoor temperature (from -50 to 50)
+  //int outdoorTemperature = 20;                       // Outdoor temperature (from -50 to 50)
+  int airTemperature = 20;
 
   // Indicators
   bool leftTurningIndicator = false;                 // Left blinker
@@ -131,11 +132,11 @@ class GameState {
   bool batteryLight = false;                         // Show Battery Warning.
 
   // Clock
-  uint8_t clockHour = 0;                                 // Hour, simple format statement to display PC's hour.
-  uint8_t clockMinute = 0;                               // Minute, simple format statement to display PC's minute.
-  uint8_t clockYear = 0;                                 // Year, simple format statement to display PC's year.
-  uint8_t clockMonth = 0;                                // Month, simple format statement to display PC's month.
-  uint8_t clockDay = 0;                                  // Day, simple format statement to display PC's day.
+  int clockHour = 00;                                 // Hour, simple format statement to display PC's hour.
+  int clockMinute = 00;                               // Minute, simple format statement to display PC's minute.
+  int clockYear = 25;                                 // Year, simple format statement to display PC's year.
+  int clockMonth = 01;                                // Month, simple format statement to display PC's month.
+  int clockDay = 01;                                  // Day, simple format statement to display PC's day.
 
   // Other stuff
   int buttonEventToProcess = 0;                      // Certain clusters have buttons that can perform actions. Set this to activate them - values are cluster dependent

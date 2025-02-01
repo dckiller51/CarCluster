@@ -31,8 +31,14 @@ WebDashboard::WebDashboard(GameState &game, int serverPort, unsigned long webDas
   button2Card(&dashboard, BUTTON_CARD, "Steering button 2"),
   button3Card(&dashboard, BUTTON_CARD, "Steering button 3"),
   ignitionCard(&dashboard, BUTTON_CARD, "Ignition"),
-  outdoorTemperatureCard(&dashboard, SLIDER_CARD, "Outdoor temperature", "C", -30, 40),
+  //outdoorTemperatureCard(&dashboard, SLIDER_CARD, "Outdoor temperature", "C", -30, 40),
+  airTemperatureCard(&dashboard, SLIDER_CARD, "Outdoor temperature", "C", -30, 40),
   indicatorsBlinkCard(&dashboard, BUTTON_CARD, "[VW] Indicators blink"),
+  clockHourCard(&dashboard, SLIDER_CARD, "Time in hour", "h", 00, 23),
+  clockMinuteCard(&dashboard, SLIDER_CARD, "Time in minute", "min", 00, 59),
+  clockYearCard(&dashboard, SLIDER_CARD, "Year", "yy", 01, 99),
+  clockMonthCard(&dashboard, SLIDER_CARD, "Month", "mm", 01, 12),
+  clockDayCard(&dashboard, SLIDER_CARD, "Day", "dd", 01, 31),
   driveModeCard(&dashboard, SLIDER_CARD, "[BMW] Drive mode", "", 1, 7) { 
   this->webDashboardUpdateInterval = webDashboardUpdateInterval;
   introCard.update("Not all functions are available on all clusters");
@@ -165,15 +171,51 @@ void WebDashboard::begin() {
     dashboard.sendUpdates();
   });
 
-  outdoorTemperatureCard.attachCallback([&](int value) {
+  /*outdoorTemperatureCard.attachCallback([&](int value) {
     gameState.outdoorTemperature = value;
     outdoorTemperatureCard.update(value);
+    dashboard.sendUpdates();
+  });*/
+
+  airTemperatureCard.attachCallback([&](int value) {
+    gameState.airTemperature = value;
+    airTemperatureCard.update(value);
     dashboard.sendUpdates();
   });
 
   indicatorsBlinkCard.attachCallback([&](int value) {
     gameState.turningIndicatorsBlinking = (bool)value;
     indicatorsBlinkCard.update(value);
+    dashboard.sendUpdates();
+  });
+
+  clockHourCard.attachCallback([&](int value) {
+    gameState.clockHour = value;
+    clockHourCard.update(value);
+    dashboard.sendUpdates();
+  });
+
+  clockMinuteCard.attachCallback([&](int value) {
+    gameState.clockMinute = value;
+    clockMinuteCard.update(value);
+    dashboard.sendUpdates();
+  });
+
+  clockYearCard.attachCallback([&](int value) {
+    gameState.clockYear = value;
+    clockYearCard.update(value);
+    dashboard.sendUpdates();
+  });
+
+  clockMonthCard.attachCallback([&](int value) {
+    gameState.clockMonth = value;
+    clockMonthCard.update(value);
+    dashboard.sendUpdates();
+  });
+
+  clockDayCard.attachCallback([&](int value) {
+    gameState.clockDay = value;
+    clockDayCard.update(value);
     dashboard.sendUpdates();
   });
 
@@ -252,8 +294,14 @@ void WebDashboard::update() {
     handbrakeCard.update(gameState.handbrake);
     ignitionCard.update(gameState.ignition);
     driveModeCard.update(gameState.driveMode);
-    outdoorTemperatureCard.update(gameState.outdoorTemperature);
+    //outdoorTemperatureCard.update(gameState.outdoorTemperature);
+    airTemperatureCard.update(gameState.airTemperature);
     indicatorsBlinkCard.update(gameState.turningIndicatorsBlinking);
+    clockHourCard.update(gameState.clockHour);
+    clockMinuteCard.update(gameState.clockMinute);
+    clockYearCard.update(gameState.clockYear);
+    clockMonthCard.update(gameState.clockMonth);
+    clockDayCard.update(gameState.clockDay);
     dashboard.sendUpdates();
 
     lastWebDashboardUpdateTime = millis();
