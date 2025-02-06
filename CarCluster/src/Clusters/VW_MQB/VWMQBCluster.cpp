@@ -101,6 +101,8 @@ void VWMQBCluster::updateWithGame(GameState& game) {
       sendBlinkers(game.leftTurningIndicator, game.rightTurningIndicator, game.turningIndicatorsBlinking);
     }
     sendParkBrake(game.handbrake);
+    sendTime(game.clockHour, game.clockMinute);
+    sendDate(game.clockYear, game.clockMonth, game.clockDay);
     //sendSWA01();
 
     // Testing only. To be removed
@@ -121,8 +123,6 @@ void VWMQBCluster::updateWithGame(GameState& game) {
     sendDoorStatus(game.doorOpen);
     //sendOutdoorTemperature(game.outdoorTemperature);
     sendAirTemperature(game.airTemperature);
-    sendTime(game.clockHour, game.clockMinute);
-    sendDate(game.clockYear, game.clockMonth, game.clockDay);
 
     if (game.buttonEventToProcess != 0) {
       sendSteeringWheelControls(game.buttonEventToProcess + 3);
@@ -598,22 +598,22 @@ void VWMQBCluster::sendTestBuffers() {
   CAN.sendMsgBuf(DATE_ID, 0, 8, testBuff);*/
 }
 
-void VWMQBCluster::sendTime(int clockHour, int clockMinute) {
+void VWMQBCluster::sendTime(uint8_t hour, uint8_t minute) {
   //timeBuff[0] = 36; // bit 0: 0x24 ?
   //timeBuff[1] = 81; // bit 1: 0x51 clock time
-  timeBuff[2] = clockHour; // bit 2: hour
-  timeBuff[3] = clockMinute; // bit 3: minute
-  //timeBuff[4] = 0x00; // bit 4: second
+  timeBuff[2] = hour; // bit 2: hour
+  timeBuff[3] = minute; // bit 3: minute
+  //timeBuff[4] = 00; // bit 4: second
 
   CAN.sendMsgBuf(DATE_ID, 0, 5, timeBuff);
 }
 
-void VWMQBCluster::sendDate(int clockYear, int clockMonth, int clockDay) {
+void VWMQBCluster::sendDate(uint8_t year, uint8_t month, uint8_t day) {
   //dateBuff[0] = 36; // bit 0: 0x24 ?
   //dateBuff[1] = 80; // bit 1: 0x50 clock date
-  dateBuff[2] = clockYear; // bit 2: year
-  dateBuff[3] = clockMonth; // bit 3: month
-  dateBuff[4] = clockDay; // bit 4: day
+  dateBuff[2] = year; // bit 2: year
+  dateBuff[3] = month; // bit 3: month
+  dateBuff[4] = day; // bit 4: day
 
   CAN.sendMsgBuf(DATE_ID, 0, 5, dateBuff);
 }

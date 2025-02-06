@@ -132,11 +132,11 @@ class GameState {
   bool batteryLight = false;                         // Show Battery Warning.
 
   // Clock
-  int clockHour = 00;                                 // Hour, simple format statement to display PC's hour.
-  int clockMinute = 00;                               // Minute, simple format statement to display PC's minute.
-  int clockYear = 25;                                 // Year, simple format statement to display PC's year.
-  int clockMonth = 01;                                // Month, simple format statement to display PC's month.
-  int clockDay = 01;                                  // Day, simple format statement to display PC's day.
+  uint8_t clockHour = 00;                                 // Hour, simple format statement to display PC's hour.
+  uint8_t clockMinute = 00;                               // Minute, simple format statement to display PC's minute.
+  uint8_t clockYear = 25;                                 // Year, simple format statement to display PC's year.
+  uint8_t clockMonth = 01;                                // Month, simple format statement to display PC's month.
+  uint8_t clockDay = 01;                                  // Day, simple format statement to display PC's day.
 
   // Other stuff
   int buttonEventToProcess = 0;                      // Certain clusters have buttons that can perform actions. Set this to activate them - values are cluster dependent

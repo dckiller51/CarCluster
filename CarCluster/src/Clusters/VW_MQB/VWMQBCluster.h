@@ -151,8 +151,8 @@ class VWMQBCluster: public Cluster {
     //void sendOutdoorTemperature(int temperature);
     void sendAirTemperature(int temperature);
     void sendOtherLights();
-    void sendTime(int clockHour, int clockMinute);
-    void sendDate(int clockYear, int clockMonth, int clockDay);
+    void sendTime(uint8_t hour, uint8_t minute);
+    void sendDate(uint8_t year, uint8_t month, uint8_t day);
     
     void setFuel(GameState& game);
     uint8_t mapGenericGearToLocalGear(GearState inputGear);
