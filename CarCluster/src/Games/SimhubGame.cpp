@@ -42,10 +42,10 @@ void SimhubGame::decodeSerialData(JsonDocument& doc) {
   gameState.fuelQuantity = doc["fue"];
   gameState.handbrake = doc["hnb"];
   gameState.absLight = doc["abs"];
-  gameState.clockHour = doc["chh"];
-  gameState.clockMinute = doc["cmm"];
-  gameState.clockYear = doc["cyy"];
-  gameState.clockMonth = doc["cmm"];
-  gameState.clockDay = doc["cdd"];
+  gameState.clockHour = doc["thh"];
+  gameState.clockMinute = doc["tmm"];
+  gameState.clockYear = doc["dyy"];
+  gameState.clockMonth = doc["dmm"];
+  gameState.clockDay = doc["ddd"];
 
 }

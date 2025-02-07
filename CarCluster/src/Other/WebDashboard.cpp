@@ -36,9 +36,9 @@ WebDashboard::WebDashboard(GameState &game, int serverPort, unsigned long webDas
   indicatorsBlinkCard(&dashboard, BUTTON_CARD, "[VW] Indicators blink"),
   clockHourCard(&dashboard, SLIDER_CARD, "Time in hour", "h", 00, 23),
   clockMinuteCard(&dashboard, SLIDER_CARD, "Time in minute", "min", 00, 59),
-  clockYearCard(&dashboard, SLIDER_CARD, "Year", "yy", 01, 99),
-  clockMonthCard(&dashboard, SLIDER_CARD, "Month", "mm", 01, 12),
-  clockDayCard(&dashboard, SLIDER_CARD, "Day", "dd", 01, 31),
+  clockYearCard(&dashboard, SLIDER_CARD, "Year", "", 01, 99),
+  clockMonthCard(&dashboard, SLIDER_CARD, "Month", "", 01, 12),
+  clockDayCard(&dashboard, SLIDER_CARD, "Day", "", 01, 31),
   driveModeCard(&dashboard, SLIDER_CARD, "[BMW] Drive mode", "", 1, 7) { 
   this->webDashboardUpdateInterval = webDashboardUpdateInterval;
   introCard.update("Not all functions are available on all clusters");

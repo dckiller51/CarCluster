@@ -599,23 +599,18 @@ void VWMQBCluster::sendTestBuffers() {
 }
 
 void VWMQBCluster::sendTime(uint8_t hour, uint8_t minute) {
-  //timeBuff[0] = 36; // bit 0: 0x24 ?
-  //timeBuff[1] = 81; // bit 1: 0x51 clock time
   timeBuff[2] = hour; // bit 2: hour
   timeBuff[3] = minute; // bit 3: minute
-  //timeBuff[4] = 00; // bit 4: second
 
-  CAN.sendMsgBuf(DATE_ID, 0, 5, timeBuff);
+  CAN.sendMsgBuf(DATE_ID, 1, 5, timeBuff);
 }
 
 void VWMQBCluster::sendDate(uint8_t year, uint8_t month, uint8_t day) {
-  //dateBuff[0] = 36; // bit 0: 0x24 ?
-  //dateBuff[1] = 80; // bit 1: 0x50 clock date
   dateBuff[2] = year; // bit 2: year
   dateBuff[3] = month; // bit 3: month
   dateBuff[4] = day; // bit 4: day
 
-  CAN.sendMsgBuf(DATE_ID, 0, 5, dateBuff);
+  CAN.sendMsgBuf(DATE_ID, 1, 5, dateBuff);
 }
 
 
