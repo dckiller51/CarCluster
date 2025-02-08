@@ -138,12 +138,18 @@ In the Update messages enter the following code:
      ', "lft":' + isnull([TurnIndicatorLeft], 0) +
      ', "rit":' + isnull([TurnIndicatorRight], 0) +
      ', "oit":' + truncate(isnull([OilTemperature], 0)) + 
+     ', "air":' + isnull([AirTemperature], 0) +
      ', "pau":' + isnull([DataCorePlugin.GamePaused], 0) +
      ', "run":' + isnull([DataCorePlugin.GameRunning], 0) +
      ', "fue":' + truncate(isnull([DataCorePlugin.Computed.Fuel_Percent], 0)) +
      ', "hnb":' + isnull([Handbrake], 0) +
      ', "abs":' + isnull([ABSActive], 0) +
      ', "tra":' + isnull([TCActive], 0) +
+     ', "thh":' + format([DataCorePlugin.CurrentDateTime], 'HH') +
+     ', "tmm":' + format([DataCorePlugin.CurrentDateTime], 'mm') +
+     ', "dyy":' + format([DataCorePlugin.CurrentDateTime], 'yy') +
+     ', "dmm":' + format([DataCorePlugin.CurrentDateTime], 'MM') +
+     ', "ddd":' + format([DataCorePlugin.CurrentDateTime], 'dd') +     
      '}\n'
 
 You can now enjoy CarCluster with any game that is supported by Simhub.
